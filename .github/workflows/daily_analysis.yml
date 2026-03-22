@@ -43,3 +43,8 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           MAIL_RECIPIENT: ${{ secrets.MAIL_RECIPIENT }}
 
+       - name: Upload Report
+         uses: actions/checkout@v5
+         with:
+           name: stock-report
+           path: report.html
