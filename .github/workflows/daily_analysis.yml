@@ -20,31 +20,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v5
+        - name: Checkout Repository
+          uses: actions/checkout@v5
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'
+        - name: Setup Python
+          uses: actions/setup-python@v5
+          with:
+            python-version: '3.11'
+            cache: 'pip'
 
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+        - name: Install Dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
 
-      - name: Execute Stock Analyzer
+        - name: Execute Stock Analyzer
         # 使用儲存庫的 Secrets 作為環境變數傳入腳本
-        run: |
-          python stock_analyzer.py --force
-        env:
-          GMAIL_USER: ${{ secrets.GMAIL_USER }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          MAIL_RECIPIENT: ${{ secrets.MAIL_RECIPIENT }}
+          run: |
+            python stock_analyzer.py --force
+          env:
+            GMAIL_USER: ${{ secrets.GMAIL_USER }}
+            GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+            MAIL_RECIPIENT: ${{ secrets.MAIL_RECIPIENT }}
 
-       - name: Upload Report
-         uses: actions/checkout@v5
-         with:
-           name: stock-report
-           path: report.html
+         - name: Upload Report
+           uses: actions/checkout@v5
+           with:
+             name: stock-report
+             path: report.html
