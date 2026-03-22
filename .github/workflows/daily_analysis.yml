@@ -45,6 +45,6 @@ jobs:
 
       - name: Upload Report
         uses: actions/upload-artifact@v5
-
-      - name: stock-report
-        path: report.html
+        with:
+          name: stock-report
+          path: report.html
