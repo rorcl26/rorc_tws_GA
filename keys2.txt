@@ -1,0 +1,1 @@
+{"Date": "1150320", "Code": "0050", "Name": "元大台灣50", "TradeVolume": "72638922", "TradeValue": "5517624557", "OpeningPrice": "76.20", "HighestPrice": "76.40", "LowestPrice": "75.50", "ClosingPrice": "75.90", "Change": "-0.1000", "Transaction": "101109"}

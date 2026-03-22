@@ -1,0 +1,36 @@
+name: Daily Stock Analysis
+
+on:
+  schedule:
+    # 每天 UTC 09:00 執行 (對應台灣時間 17:00)
+    # 取星期一(1) 到 星期五(5) 執行
+    - cron: '0 9 * * 1-5'
+  workflow_dispatch: # 支援手動觸發測試
+
+jobs:
+  run-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Execute Stock Analyzer
+        # 使用儲存庫的 Secrets 作為環境變數傳入腳本
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_RECIPIENT: ${{ secrets.MAIL_RECIPIENT }}
+        run: |
+          python stock_analyzer.py --force
